@@ -1,0 +1,29 @@
+# PersistentVolume for Jenkins
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: jenkins-pv
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/Users/mariotimofte/jenkins_home"
+---
+# PersistentVolume for Jenkins
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jenkins-pv-claim
+  namespace: ns-jenkins
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
